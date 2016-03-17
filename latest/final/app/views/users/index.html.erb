@@ -1,0 +1,24 @@
+<% if flash[:notice] %>
+<div class="notice">
+    <%= flash[:notice] %>
+</div>
+<% end %>
+
+<div id="login">
+    <h2><span>Sign in</span></h2>
+
+
+<filedset>
+    <%= form_tag(login_path, method: "post") do %>
+        <p><%= label_tag(:user_name, "user name") %></p>
+        <p><%= text_field_tag(:user_name) %></p>
+
+        <p><%= label_tag(:password, "Password") %></p>
+        <p><%= password_field_tag(:password) %></p>
+        <p><%= submit_tag("Login") %></p>
+    <% end %>
+</filedset>
+
+<%= link_to "Register", new_user_path %>
+
+</div>

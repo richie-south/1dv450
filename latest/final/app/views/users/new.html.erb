@@ -1,0 +1,33 @@
+<% if @user.errors.any? %>
+    <div>
+        <h2></h2>
+        <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
+
+<div class="login">
+    <h2>
+        <apsn>Register</apsn>
+    </h2>
+
+<fieldset>
+    <%= form_for @user do |f| %>
+        <p><%= f.label :user_name %></p>
+        <p><%= f.text_field :user_name %></p>
+
+        <p><%= f.label :password %></p>
+        <p><%= f.password_field :password %></p>
+
+        <p><%= f.label :password_confirmation %></p>
+        <p><%= f.password_field :password_confirmation %></p>
+
+        <p><%= f.submit "Register"  %></p>
+
+    <% end %>
+</fieldset>
+
+</div>
