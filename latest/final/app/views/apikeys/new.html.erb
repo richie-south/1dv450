@@ -1,5 +1,6 @@
 <%= simple_form_for :app, url: apikeys_path do|a| %>
     <div>
+        <%= a.label 'Skriv dit app namn' %>
         <%=	 a.input :app_name %>
         <%=	 a.button :submit %>
     </div>

@@ -1,7 +1,8 @@
 <h1>Din nyckel</h1>
 <%= link_to "logout", logout_path %>
+<% if current_user.isAdmin == false %>
 <p><%=  link_to "ny applikation", new_apikey_path %></p>
-
+<% end %>
 <%= @userApplikations.each do |app| %>
     <p>
         <%= label_tag(app.app_name, "App name: "+app.app_name) %><br/>
