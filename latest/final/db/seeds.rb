@@ -13,6 +13,8 @@ app3 = Applikation.create(:app_name => "killa appen", :appkey => "killanyckelen"
 usr1 = User.create(:user_name => "kalle", :password => "1234567")
 usr2 = User.create(:user_name => "hampa", :password => "qwerty")
 
+adminusr = User.create(:user_name => "admin", :password => "password", :isAdmin => true)
+
 usr1.applikations << app1
 usr2.applikations << app2
 usr2.applikations << app3

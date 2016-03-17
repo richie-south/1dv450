@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
         if @user.save
             session[:userid] = @user.id
-            redirect_to apikey_path
+            redirect_to apikeys_path
         else
             render :action => "new"
         end
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
         u = User.find_by_user_name(params[:user_name])
         if u && u.authenticate(params[:password])
             session[:user_id] = u.id
-            redirect_to apikey_path
+            redirect_to apikeys_path
         else
             flash[:notice] = "Failed!"
             redirect_to root_path
@@ -31,7 +31,8 @@ class UsersController < ApplicationController
     end
 
     def logout
-
+        session[:user_id] = nil
+        redirect_to root_path, :notice => "logged out"
     end
 
     private

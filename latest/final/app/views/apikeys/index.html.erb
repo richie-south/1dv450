@@ -1,0 +1,12 @@
+<h1>Din nyckel</h1>
+<%= link_to "logout", logout_path %>
+<p><%=  link_to "ny applikation", new_apikey_path %></p>
+
+<%= @userApplikations.each do |app| %>
+    <p>
+        <%= label_tag(app.app_name, "App name: "+app.app_name) %><br/>
+        <%= label_tag(app.appkey, "Api Key: "+app.appkey) %><br/>
+        <%=  link_to "Ta bort", apikey_path(app), method: :delete, data: { confirm: 'SÄKER?' }%>
+    </p>
+    <hr/>
+<% end %>
