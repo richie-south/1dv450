@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160309210103) do
+ActiveRecord::Schema.define(version: 20160329172600) do
 
   create_table "applikations", force: :cascade do |t|
     t.integer  "user_id"
@@ -22,6 +22,48 @@ ActiveRecord::Schema.define(version: 20160309210103) do
   end
 
   add_index "applikations", ["user_id"], name: "index_applikations_on_user_id"
+
+  create_table "creators", force: :cascade do |t|
+    t.string   "name"
+    t.string   "password_digest"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  create_table "positions", force: :cascade do |t|
+    t.decimal  "latitude"
+    t.decimal  "longitude"
+    t.string   "address"
+    t.integer  "toilet_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "positions", ["toilet_id"], name: "index_positions_on_toilet_id"
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "toilets", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "creator_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "toilets", ["creator_id"], name: "index_toilets_on_creator_id"
+
+  create_table "toilets_tags", id: false, force: :cascade do |t|
+    t.integer "toilet_id"
+    t.integer "tag_id"
+  end
+
+  add_index "toilets_tags", ["tag_id"], name: "index_toilets_tags_on_tag_id"
+  add_index "toilets_tags", ["toilet_id"], name: "index_toilets_tags_on_toilet_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "user_name",       limit: 20,                 null: false
