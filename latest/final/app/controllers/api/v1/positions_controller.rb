@@ -1,8 +1,7 @@
 class Api::V1::PositionsController < Api::V1::ApiBaseController
     before_action :offset_params, only: [:index]
     before_action :key_access
-    before_action :authenticate, only: [:create, :destroy, :update]
-
+    #before_action :authenticate, only: [:create, :destroy, :update]
 
     def index
         if params[:toilet_id].present?
@@ -32,9 +31,6 @@ class Api::V1::PositionsController < Api::V1::ApiBaseController
     end
 
     def create
-        json_params = ActionController::Parameters.new(JSON.parse(request.body.read))
-        pos_params = json_params.require(:position).permit(:address, :toilet_id)
-
         po = Position.new(pos_params)
         if Position.where(address: po.address).present?
             render json: { errors: "position already exsists" }, status: :conflict
@@ -49,8 +45,6 @@ class Api::V1::PositionsController < Api::V1::ApiBaseController
 
     def update
         if pos = Position.find_by_id(params[:id])
-            json_params = ActionController::Parameters.new(JSON.parse(request.body.read))
-            pos_params = json_params.require(:position).permit(:address, :toilet_id)
 
             if pos.update(pos_params)
                 posjson = pos.as_json(only: [:id, :address, :latitude, :longitude])
@@ -74,5 +68,13 @@ class Api::V1::PositionsController < Api::V1::ApiBaseController
             render json: { errors: "no position found! " }, status: :not_found
         end
     end
+
+    private
+
+    def pos_params
+        json_params = ActionController::Parameters.new(JSON.parse(request.body.read))
+        json_params.require(:position).permit(:address, :toilet_id)
+    end
+
 
 end

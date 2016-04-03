@@ -47,6 +47,14 @@ ActiveRecord::Schema.define(version: 20160329172600) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "tags_toilets", id: false, force: :cascade do |t|
+    t.integer "toilet_id"
+    t.integer "tag_id"
+  end
+
+  add_index "tags_toilets", ["tag_id"], name: "index_tags_toilets_on_tag_id"
+  add_index "tags_toilets", ["toilet_id"], name: "index_tags_toilets_on_toilet_id"
+
   create_table "toilets", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
@@ -56,14 +64,6 @@ ActiveRecord::Schema.define(version: 20160329172600) do
   end
 
   add_index "toilets", ["creator_id"], name: "index_toilets_on_creator_id"
-
-  create_table "toilets_tags", id: false, force: :cascade do |t|
-    t.integer "toilet_id"
-    t.integer "tag_id"
-  end
-
-  add_index "toilets_tags", ["tag_id"], name: "index_toilets_tags_on_tag_id"
-  add_index "toilets_tags", ["toilet_id"], name: "index_toilets_tags_on_toilet_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "user_name",       limit: 20,                 null: false
