@@ -28,6 +28,12 @@ gem 'bcrypt', '~> 3.1.7'
 # makes longitudes and latitudes
 gem 'geocoder'
 
+gem 'knock'
+
+gem 'responders', '~> 2.0'
+
+gem 'active_model_serializers'
+
 gem 'simple_form', '~> 3.2.1'
 # Use Unicorn as the app server
 # gem 'unicorn'
