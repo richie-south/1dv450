@@ -24,10 +24,10 @@ ActiveRecord::Schema.define(version: 20160329172600) do
   add_index "applikations", ["user_id"], name: "index_applikations_on_user_id"
 
   create_table "creators", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",            limit: 20, null: false
     t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "positions", force: :cascade do |t|

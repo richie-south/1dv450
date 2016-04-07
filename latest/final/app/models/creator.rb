@@ -1,9 +1,10 @@
 class Creator < ActiveRecord::Base
     has_many :toilets
-
     has_secure_password
 
-    validates :name, presence: true, length: {within: 3..100}
-    validates :password, presence: true, length: {within: 6..100}
-    validates :password_confirmation, presence: true
+    validates :name,
+              :presence => {:message => "du måste ange att okej namn"},
+              :length => {:minimum => 3, :message => "namnet måste vara minst 3 tecken långt" },
+              uniqueness: true
+
 end
