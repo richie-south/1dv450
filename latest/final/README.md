@@ -9,6 +9,8 @@ kör rails s
 [Postman url](https://www.getpostman.com/collections/eada35f52017f547bc4f)
 
 
+
+
 #login
 
 användarnamn
@@ -27,3 +29,5 @@ användarnamn användare
 lösen
 
 '1234567'
+
+Mera info finns i seed.rb filen
