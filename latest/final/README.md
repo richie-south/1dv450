@@ -2,7 +2,11 @@ ladda ned reot
 
 kör bundle install
 
-sedan rails s
+kör rake db:migrate
+kör rake db:seed
+kör rails s
+
+[Postman url](https://www.getpostman.com/collections/eada35f52017f547bc4f)
 
 
 #login
@@ -23,23 +27,3 @@ användarnamn användare
 lösen
 
 '1234567'
-
-
-
-# Grej att lösa
-
-###inloggad
-
-- updatera händelser
-
-- lägga till händelser
-
-- skapa taggar för händelser
-
-###untloggad
-
-- lista händelser sorterat på datum
-
-- lista händelser med tagg
-
-- list händelser i närheten

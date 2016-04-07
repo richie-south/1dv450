@@ -3,63 +3,71 @@ class Api::V1::PositionsController < Api::V1::ApiBaseController
     before_action :key_access
     before_action :authenticate, only: [:create, :destroy, :update]
 
+    # shows all positions, shows all positions on toilet
     def index
         if params[:toilet_id].present?
             to = Toilet.find_by_id(params[:toilet_id])
-            po = to.positions unless to.nil?
+            position = to.positions unless to.nil?
         else
-            po = Position.all
+            position = Position.all # gets all positions if no toilet_id is set
         end
 
-        if po.present?
-            po = po.drop(@offset)
-            po = po.take(@limit)
+        if position.present?
+            position = position.drop(@offset)
+            position = position.take(@limit)
 
-            respond_with :api, po, status: :ok
+            respond_with :api, position, status: :ok
         else
             render json: { errors: "no positions found! " }, status: :not_found
         end
     end
 
+    # shows specifik position
     def show
-        po = Position.find_by_id(params[:id])
-        if po.nil?
+        position = Position.find_by_id(params[:id])
+        if position.nil?
             render json: { errors: "no position found! "}, status: :not_found
         else
-            respond_width :api, po
+            respond_width :api, position
         end
     end
 
+    # creates new position if it dont already exists
     def create
-        po = Position.new(pos_params)
-        if Position.where(address: po.address).present?
+        position = Position.new(pos_params)
+        if Position.where(address: position.address).present?
             render json: { errors: "position already exsists" }, status: :conflict
         else
-            if po.save
-                respond_with :api, po, status: :created
+            if position.save
+                respond_with :api, position, status: :created
             else
-                render json: { errors: po.errors.messages }, status: :bad_request
+                render json: { errors: position.errors.messages }, status: :bad_request
             end
         end
     end
 
+    # updates position
     def update
         if pos = Position.find_by_id(params[:id])
-
-            if pos.update(pos_params)
-                posjson = pos.as_json(only: [:id, :address, :latitude, :longitude])
-
-                respond_with :api, pos do |format|
-                    format.json { render json: { action: "update", cordinates: posjson }, status: :accepted }
-                end
+            if Position.find_by_address(pos_params['address']).present? # checks if position address alredy exsists
+                render json: { errors: "position already exsists" }, status: :conflict
             else
-                render json: { errors: pos.errors.messages }, status: :bad_request
+                if pos.update(pos_params)
+                    posjson = pos.as_json(only: [:id, :address, :latitude, :longitude])
+
+                    respond_with :api, pos do |format|
+                        format.json { render json: { action: "update", cordinates: posjson }, status: :accepted }
+                    end
+                else
+                    render json: { errors: pos.errors.messages }, status: :bad_request
+                end
             end
         else
             render json: { errors: "no position found! " }, status: :not_found
         end
     end
 
+    # destorys specifik position
     def destroy
         if po = Position.find_by_id(params[:id])
             po.destroy
@@ -71,6 +79,7 @@ class Api::V1::PositionsController < Api::V1::ApiBaseController
 
     private
 
+    # gets specifik params
     def pos_params
         json_params = ActionController::Parameters.new(JSON.parse(request.body.read))
         json_params.require(:position).permit(:address, :toilet_id)

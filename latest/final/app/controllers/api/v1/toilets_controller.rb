@@ -3,19 +3,24 @@ class Api::V1::ToiletsController < Api::V1::ApiBaseController
     before_action :offset_params, only: [:index]
     respond_to :json
 
+
     def index
+        # checks if tag_id param is set
         if params[:tag_id].present?
             tag = Tag.find_by_id(params[:tag_id])
             toilet = tag.toilets unless tag.nil?
-        elsif params[:creator_id].present?
-            creator = Creator.find_by_id(params[:creator_id])
-            toilet = creator.toilets unless creator.nil?
+        # checks if address param is set
         elsif params[:address].present?
             location = Location.near(params[:address], 20)
             toilet = []
             location.each do |loc|
                 toilet.push(Toilet.find_by_id(location.toilet_id))
             end
+        # checks if creator_id param is set
+        elsif params[:creator_id].present?
+            creator = Creator.find_by_id(params[:creator_id])
+            toilet = creator.toilets unless creator.nil?
+        # checks if latitude and longitude param is set
         elsif params[:latitude] && params[:longitude]
             location = Location.near([params[:lat], params[:lon]], 50)
             toilet = []
@@ -23,6 +28,7 @@ class Api::V1::ToiletsController < Api::V1::ApiBaseController
                 toilet.push(Toilet.find_by_id(location.toilet_id))
             end
         else
+            # i none of the above params is set get all toilets
             toilet = Toilet.all
         end
 
@@ -36,6 +42,7 @@ class Api::V1::ToiletsController < Api::V1::ApiBaseController
         end
     end
 
+    # shows specifik toilet
     def show
         toilet = Toilet.find_by_id(params[:id])
         if toilet.nil?
@@ -47,17 +54,18 @@ class Api::V1::ToiletsController < Api::V1::ApiBaseController
 
 
     def create
-        toilet = Toilet.new(toilet_params.except(:tags, :positions))
+        toilet = Toilet.new(toilet_params.except(:tags, :positions)) # creates new toilet width all parameters except tags, positions
         toilet.creator_id = current_user.id
 
+        # checks if tags params excists
         if toilet_params[:tags].present?
             tag_params = toilet_params[:tags]
 
             tag_params.each do |tag|
-                if Tag.find_by_name(tag["name"]).present?
-                    toilet.tags << Tag.find_by_name(tag["name"])
+                if Tag.find_by_name(tag['name']).present?
+                    toilet.tags << Tag.find_by_name(tag['name']) # ads exsisting tag to toilet
                 else
-                    toilet.tags << Tag.create(tag)
+                    toilet.tags << Tag.create(tag) # creates new tag and ads it to toilet
                 end
             end
         end
@@ -66,25 +74,74 @@ class Api::V1::ToiletsController < Api::V1::ApiBaseController
             render json: { errors: "toilet exsists! " }, status: :conflict
         elsif toilet.save
 
+            # if save works check for position param
             if toilet_params[:positions].present?
+
                 toilet_params[:positions].each do |pos|
-                    l = Position.find_by_address(pos["address"])
-                    Position.create(address: pos["address"], toilet_id: toilet.id)
+                    if Position.find_by_address(pos['address']).present? # if position exsists throw error
+                        render json: { errors: "position is used by a nother toilet! " }, status: :conflict
+                    else
+                        Position.create(address: pos['address'], toilet_id: toilet.id) # crates new position
+                    end
+                end
             end
-        end
             respond_with :api, toilet, status: :created
         else
             render json: { errors: toilet.errors.messages }, status: :bad_request
         end
-
     end
 
-
+    # updates specifik toilet
     def update
+        if toilet = Toilet.find_by_id(params[:id])
+
+            # is positions param set
+            if toilet_params[:positions].present?
+                toilet.positions = [] # emty positions
+                toilet_params[:positions].each do |pos|
+                    if Position.find_by_address(pos['address']).present? # if position exsists throw error
+                        render json: { errors: "position is used by a nother toilet! " }, status: :conflict
+                    else
+                        Position.create(address: pos['address'], toilet_id: toilet.id) # crates new position
+                    end
+                end
+            end
+
+            # is tags param set
+            if toilet_params[:tags].present?
+                tag_params = toilet_params[:tags]
+                toilet.tags = [] # emty tags
+                tag_params.each do |tag|
+                    if Tag.find_by_name(tag["name"]).present?
+                        toilet.tags << Tag.find_by_name(tag["name"]) # ads exsisting tag to toilet
+                    else
+                        toilet.tags << Tag.create(tag) # creates new tag and ads it to toilet
+                    end
+                end
+            end
+
+            if toilet.update(toilet_params.except(:tags, :positions))
+                toiletpos = toilet.positions.as_json(only: [:id, :address, :latitude, :longitude])
+                respond_with :api, toilet do |format|
+                    format.json { render json: { action: "update", toilet: {id: toilet.id, name: toilet.name, description: toilet.description, locations: toiletpos} }, status: :created }
+                end
+            else
+                render json: { errors: toilet.errors.messages }, status: :bad_request
+            end
+
+        else
+            render json: { errors: "toilet not found! " }, status: :not_found
+        end
     end
 
-
+    # removes specifik toilet
     def destroy
+        if toilet = Toilet.find_by_id(params[:id])
+            toilet.destroy
+            render json: { action: "destroy", message: "toilet removed! ", status: :ok}
+        else
+            render json: { errors: "toilet not found! " }, status: :not_found
+        end
     end
 
     private
