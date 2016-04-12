@@ -1,6 +1,43 @@
-<h3>All toilet positions</h3>
-<ul >
-    <li data-ng-repeat="_position in toilet.positionList"  is-open="status.open">
-        {{ _position.address }} <a data-ng-href='toilets/{{_position.toilet_id}}'>More info</a>
-    </li>
-</ul>
+<section class="hero is-primary">
+  <div class="hero-content">
+    <div class="container">
+      <h1 class="title">
+        All toilets
+      </h1>
+    </div>
+  </div>
+</section>
+<ng-map default-style="true" zoom="11" center="[56.658536, 16.3851317,11]">
+    <marker ng-repeat="t in toilets.toiletList" position="{{t.latitude}},{{t.longitude}}"
+        data="{{t}}"
+        on-click="toilets.markerClick(t)";
+        title="name: {{p.name}}"
+        id='{{t.toilet_id}}'
+    ></marker>
+
+
+    <info-window id="iwi">
+        <div ng-non-bindable="">
+            name: {{toilets.mark.name}}<br/>
+            Address: {{toilets.mark.address}}<br/>
+            <a data-ng-href="toilets/{{toilets.mark.toilet_id}}">view more</a>
+        </div>
+    </info-window>
+
+</ng-map>
+<table class="table is-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>More info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr data-ng-repeat="t in toilets.toiletList">
+        <td>{{ t.name }} </td>
+        <td>
+            <a data-ng-href='toilets/{{t.toilet_id}}'>More info</a>
+        </td>
+    </tr>
+  </tbody>
+</table>

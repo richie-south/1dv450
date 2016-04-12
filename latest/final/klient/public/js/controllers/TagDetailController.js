@@ -10,7 +10,6 @@ function TagDetailController($scope, $routeParams, TagService) {
 
     TagService.getAllToiletsOnTag($routeParams.id)
     .then(tags => {
-        console.log(tags.data.toilets);
         this.tagText = 'All toilets on tag';
         this.infoBox = 'is-info';
         this.tagList = tags.data.toilets;

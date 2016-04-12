@@ -1,0 +1,19 @@
+<table class="table is-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>created at</th>
+      <th>View all toilets width tag.</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr data-ng-repeat="_tag in tag.tagList">
+        <td>{{ _tag.name }} </td>
+        <td>{{  _tag.created_at}}</td>
+        <td>
+            <a data-ng-href='tags/{{_tag.id}}'>taged with tag</a>
+        </td>
+    </tr>
+  </tbody>
+</table>

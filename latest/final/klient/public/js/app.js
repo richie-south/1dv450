@@ -3,7 +3,7 @@
 console.log('app.js');
 
 angular
-  .module("myapp", ['ngRoute'])
+  .module("myapp", ['ngRoute', 'ngMap'])
   .config(['$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider) {
       $routeProvider.
