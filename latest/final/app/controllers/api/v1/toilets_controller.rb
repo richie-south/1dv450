@@ -11,7 +11,7 @@ class Api::V1::ToiletsController < Api::V1::ApiBaseController
             toilet = tag.toilets unless tag.nil?
         # checks if address param is set
         elsif params[:address].present?
-            location = Location.near(params[:address], 20)
+            location = Position.near(params[:address], 20)
             toilet = []
             location.each do |loc|
                 toilet.push(Toilet.find_by_id(location.toilet_id))
@@ -22,11 +22,23 @@ class Api::V1::ToiletsController < Api::V1::ApiBaseController
             toilet = creator.toilets unless creator.nil?
         # checks if latitude and longitude param is set
         elsif params[:latitude] && params[:longitude]
-            location = Location.near([params[:lat], params[:lon]], 50)
+            location = Position.near([params[:lat], params[:lon]], 50)
             toilet = []
             location.each do |loc|
                 toilet.push(Toilet.find_by_id(location.toilet_id))
             end
+        elsif params[:pos] # gets all toilets and joins toilet width positions if posible
+            toilet = Toilet.all
+
+            toilet = toilet.map { |t|
+                jtoilet = Toilet.select("*").joins(:positions).find_by_id(t.id)
+
+                if jtoilet.nil?
+                    t
+                else
+                    t = jtoilet
+                end
+            }
         else
             # i none of the above params is set get all toilets
             toilet = Toilet.all
@@ -44,13 +56,26 @@ class Api::V1::ToiletsController < Api::V1::ApiBaseController
 
     # shows specifik toilet
     def show
-        toilet = Toilet.find_by_id(params[:id])
+        if params[:pos].present? # gets toilet and joins width positions if posible
+            toilet = Toilet.select("*").joins(:positions).find_by_id(params[:id])
+
+            if toilet.nil?
+                toilet = Toilet.find_by_id(params[:id])
+            else
+                return respond_with :api, toilet
+            end
+        else
+            toilet = Toilet.find_by_id(params[:id])
+        end
+
+
         if toilet.nil?
             render json: { errors: "no toilet found! " }, status: :not_found
         else
             respond_with :api, toilet
         end
     end
+
 
 
     def create
@@ -143,6 +168,8 @@ class Api::V1::ToiletsController < Api::V1::ApiBaseController
             render json: { errors: "toilet not found! " }, status: :not_found
         end
     end
+
+
 
     private
 

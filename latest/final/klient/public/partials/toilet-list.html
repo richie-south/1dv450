@@ -1,0 +1,6 @@
+<h3>All toilet positions</h3>
+<ul >
+    <li data-ng-repeat="_position in toilet.positionList"  is-open="status.open">
+        {{ _position.address }} <a data-ng-href='toilets/{{_position.toilet_id}}'>More info</a>
+    </li>
+</ul>

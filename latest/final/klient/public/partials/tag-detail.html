@@ -1,0 +1,32 @@
+<section class="hero is-primary">
+  <div class="hero-content">
+    <div class="container">
+      <h1 class="title">
+        Tag
+      </h1>
+    </div>
+  </div>
+</section>
+
+<div class="notification" data-ng-class="tagdetail.infoBox">
+    {{ tagdetail.tagText }}
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Created at</th>
+      <th>More info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr data-ng-repeat="_tag in tagdetail.tagList">
+        <td>{{ _tag.name }} </td>
+        <td>{{ _tag.description }}</td>
+        <td>{{  _tag.created_at }}</td>
+        <td><a data-ng-href='toilets/{{_tag.id}}'>More info</a></td>
+    </tr>
+  </tbody>
+</table>

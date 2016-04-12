@@ -28,7 +28,7 @@ class Api::V1::PositionsController < Api::V1::ApiBaseController
         if position.nil?
             render json: { errors: "no position found! "}, status: :not_found
         else
-            respond_width :api, position
+            respond_with :api, position
         end
     end
 
