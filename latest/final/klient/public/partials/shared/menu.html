@@ -1,14 +1,44 @@
-<nav class="navbar">
-  <p class="navbar-item is-text-centered">
-      <a class="link is-info" data-ng-href=".">Home</a>
-  </p>
-  <p class="navbar-item is-text-centered">
-    <a class="link is-info" data-ng-href="toilets">Toilets</a>
-  </p>
-  <p class="navbar-item is-text-centered">
-      <a class="link is-info" data-ng-href="tags">Tags</a>
-  </p>
-  <p class="navbar-item is-text-centered">
-      <a class="link is-info" data-ng-href="login">login</a>
-  </p>
-</nav>
+<div ng-controller="NavController">
+
+    <div ng-if="isLoggedIn()">
+        <nav class="navbar">
+          <p class="navbar-item is-text-centered">
+              <a class="link is-info" data-ng-href=".">Home</a>
+          </p>
+          <p class="navbar-item is-text-centered">
+            <a class="link is-info" data-ng-href="toilets">Toilets</a>
+          </p>
+          <p class="navbar-item is-text-centered">
+              <a class="link is-info" data-ng-href="tags">Tags</a>
+          </p>
+          <p class="navbar-item is-text-centered">
+              <a class="link is-info" data-ng-href="login">logout</a>
+          </p>
+
+            <p class="navbar-item is-text-centered">
+                <a class="link is-info" data-ng-href="otags">Own tags</a>
+            </p>
+
+            <p class="navbar-item is-text-centered">
+                <a class="link is-info" data-ng-href="otoilets">Own toilets</a>
+            </p>
+        </nav>
+    </div>
+    <div ng-if="!isLoggedIn()">
+        <nav class="navbar">
+          <p class="navbar-item is-text-centered">
+              <a class="link is-info" data-ng-href=".">Home</a>
+          </p>
+          <p class="navbar-item is-text-centered">
+            <a class="link is-info" data-ng-href="toilets">Toilets</a>
+          </p>
+          <p class="navbar-item is-text-centered">
+              <a class="link is-info" data-ng-href="tags">Tags</a>
+          </p>
+          <p class="navbar-item is-text-centered">
+              <a class="link is-info" data-ng-href="login">login</a>
+          </p>
+        </nav>
+    </div>
+
+</div>

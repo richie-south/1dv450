@@ -4,7 +4,7 @@ angular
   .module("myapp")
   .factory('LoginService', LoginService);
 
-function LoginService($q, $http) {
+function LoginService($q, $http, $sessionStorage) {
 
     return {
         getJWT:function(data) {
@@ -16,6 +16,19 @@ function LoginService($q, $http) {
 
           };
          return $http(req);
+        },
+
+        isLoggedIn: function(){
+            return $sessionStorage.loggedInUser;
+        },
+
+        logOut: function(){
+            $sessionStorage.$reset();
+        },
+
+        getJwt: function(){
+            return $sessionStorage.jwt;
         }
+
     };
 }

@@ -1,28 +1,40 @@
 'use strict';
 
 angular
-  .module('myapp')
-  .controller('LoginController', LoginController);
+    .module('myapp')
+    .controller('LoginController', LoginController);
 
-function LoginController($scope, LoginService) {
-
-    this.save = function(user){
-        LoginService.getJWT({ username: this.user.username, password: this.user.password})
+function LoginController($scope, LoginService, $sessionStorage) {
+    this.save = function (user) {
+        LoginService.getJWT({
+                username: this.user.username,
+                password: this.user.password
+            })
             .then(result => {
                 console.log(result);
-
+                console.log(result.data.jwt);
                 this.mes = 'Succses!';
                 this.mesClass = 'is-success';
+                $sessionStorage.loggedInUser = true;
+                $sessionStorage.jwt = result.data.jwt;
+
             })
             .catch(e => {
-                if(e.status === 404){
+
+                $sessionStorage.loggedInUser = false;
+                $sessionStorage.jwt = false;
+                if(e.status === 404) {
                     this.mes = 'Faild to login!';
                     this.mesClass = 'is-danger';
-                }else{
+                } else {
                     this.mes = 'unknown error';
                     this.mesClass = 'is-warning';
                 }
             });
 
+    };
+
+    this.logout = function () {
+        LoginService.logOut();
     };
 }

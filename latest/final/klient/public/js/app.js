@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-  .module("myapp", ['ngRoute', 'ngMap'])
+  .module("myapp", ['ngRoute', 'ngMap', 'ngStorage'])
   .config(['$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider) {
       $routeProvider.
