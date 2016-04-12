@@ -1,7 +1,5 @@
 'use strict';
 
-console.log('app.js');
-
 angular
   .module("myapp", ['ngRoute', 'ngMap'])
   .config(['$routeProvider', '$locationProvider',
@@ -29,6 +27,11 @@ angular
           templateUrl: '/partials/tag-detail.html',
           controller: 'TagDetailController',
           controllerAs: 'tagdetail'
+        }).
+        when('/login/', {
+          templateUrl: '/partials/login.html',
+          controller: 'LoginController',
+          controllerAs: 'loginctr'
         }).
         otherwise({
           redirectTo: '/'

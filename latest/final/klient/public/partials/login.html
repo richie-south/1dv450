@@ -1,0 +1,52 @@
+
+<section class="hero is-primary">
+  <div class="hero-content">
+    <div class="container">
+      <h1 class="title">
+        Login
+      </h1>
+    </div>
+  </div>
+</section>
+<style>
+.myform input.ng-invalid.ng-touched {
+    background-color: #e23d45;
+  }
+
+  .myform input.ng-valid.ng-touched {
+    background-color: #50e964;
+  }
+</style>
+<section class="section">
+    <div class="container">
+    <div class="notification" data-ng-class="loginctr.mesClass">
+        {{ loginctr.mes }}
+    </div>
+    <div class="myform">
+        <form name="form" class="css-form" novalidate>
+
+
+        <p class="control has-icon">
+            <input class="input" type="text" placeholder="Username" ng-model="loginctr.user.username" name="uname"  required>
+        </p>
+        <div ng-show="form.$submitted || form.username.$touched">
+          <div ng-show="form.uname.$error.required">Enter username</div>
+        </div>
+
+        <p class="control has-icon">
+            <input class="input" type="password" placeholder="Password" ng-model="loginctr.user.password" name="pas" required >
+        </p>
+        <div ng-show="form.$submitted || form.password.$touched">
+            <div ng-show="form.pas.$error.required">Enter password</div>
+        </div>
+
+        <p class="control">
+            <button class="button is-success" ng-click="loginctr.save(user)">
+                Login
+            </button>
+        </p>
+        </form>
+    </div>
+    </div>
+
+</section>
