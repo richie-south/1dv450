@@ -20,6 +20,17 @@ function CrudToiletService($q, $http, $sessionStorage) {
          return $http(req);
         },
 
+        create:function(data) {
+            console.log(data);
+            var req = {
+                method: "post",
+                url :"http://localhost:3000/api/toilets/?appkey=supernyckelen",
+                headers: {"Authorization": $sessionStorage.jwt},
+                data: data
+            };
+            return $http(req);
+        },
+
         remove: function(id){
             var req = {
             method: "delete",

@@ -58,6 +58,11 @@ angular
           controller: 'newTagController',
           controllerAs: 'newtag'
         }).
+        when('/newToilet', {
+          templateUrl: '/partials/newToilet.html',
+          controller: 'newToiletController',
+          controllerAs: 'newtoilets'
+        }).
         otherwise({
           redirectTo: '/'
         });

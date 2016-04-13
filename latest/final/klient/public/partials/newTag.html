@@ -7,7 +7,15 @@
     </div>
   </div>
 </section>
+<style>
+.myform input.ng-invalid.ng-touched {
+    background-color: #e23d45;
+  }
 
+  .myform input.ng-valid.ng-touched {
+    background-color: #50e964;
+  }
+</style>
 <div class="notification" data-ng-class="newtag.mesClass">
     {{ newtag.mes }}
 </div>
@@ -18,14 +26,26 @@
         <div class="myform">
             <form name="form" class="css-form" novalidate>
 
-
             <p class="control ">
-                <input class="input"type="text" placeholder="name" ng-model="newtag.tag.name" name="name"  >
+                <input class="input" type="text" placeholder="name" ng-model="newtoilet.toilet.name" name="name"  >
             </p>
 
+            <p class="control ">
+                <input class="input is-primary" type="text" placeholder="description"  ng-model="newtoilet.toilet.description" name="description">
+            </p>
+            <p class="control ">
+                <input class="input is-primary" type="text" placeholder="address"  ng-model="newtoilet.toilet.address" name="address">
+            </p>
+
+            <!--<div data-ng-repeat="tag in newtoilet.toilet.tags">
+                <p class="control">
+                  <input class="input is-primary" value="{{tag}}" type="text" placeholder="name"  ng-model="newtoilet.toilet.tag" name="tag$index">
+                </p>
+            </div>-->
+
             <p class="control">
-                <button class="button is-success" ng-click="newtag.save(tag)">
-                    make new tag!
+                <button class="button is-success" ng-click="newtoilet.save(user)">
+                    submit
                 </button>
             </p>
 

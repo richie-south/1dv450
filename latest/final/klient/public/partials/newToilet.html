@@ -1,0 +1,59 @@
+<section class="hero is-primary">
+  <div class="hero-content">
+    <div class="container">
+      <h1 class="title">
+          New Toilet!
+      </h1>
+    </div>
+  </div>
+</section>
+<style>
+.myform input.ng-invalid.ng-touched {
+    background-color: #e23d45;
+  }
+
+  .myform input.ng-valid.ng-touched {
+    background-color: #50e964;
+  }
+</style>
+<div class="notification" data-ng-class="newtoilet.mesClass">
+    {{ newtoilet.mes }}
+</div>
+
+<section class="section">
+    <div class="container">
+
+        <div class="myform">
+            <form name="form" class="css-form" novalidate>
+
+            <p class="control ">
+                <input class="input" type="text" placeholder="name" ng-model="newtoilets.toilet.name" name="name"  >
+            </p>
+
+            <p class="control ">
+                <input class="input is-primary" type="text" placeholder="description"  ng-model="newtoilets.toilet.description" name="description">
+            </p>
+            <p class="control ">
+                <input class="input is-primary" type="text" placeholder="address"  ng-model="newtoilets.toilet.address" name="address">
+            </p>
+
+            <div data-ng-repeat="tag in newtoilets.tags">
+                    <p class="control">
+                    <label class="checkbox">
+                      <input type="checkbox" id="tag-{{$index}}" ng-model="tag.val">
+                        {{tag.name}}
+                    </label>
+                  </p>
+            </div>
+
+            <p class="control">
+                <button class="button is-success" ng-click="newtoilets.save(user)">
+                    submit
+                </button>
+            </p>
+
+            </form>
+        </div>
+
+    </div>
+</section>

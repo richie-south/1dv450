@@ -6,7 +6,6 @@ angular
 
 function newTagController($scope, $http, $sessionStorage, $route, $routeParams, CrudTagService) {
 
-
     this.save = function() {
         var obj = {
             tag:{
