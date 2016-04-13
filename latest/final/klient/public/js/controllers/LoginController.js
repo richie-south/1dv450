@@ -11,18 +11,17 @@ function LoginController($scope, LoginService, $sessionStorage) {
                 password: this.user.password
             })
             .then(result => {
-                console.log(result);
-                console.log(result.data.jwt);
                 this.mes = 'Succses!';
                 this.mesClass = 'is-success';
+                $sessionStorage.username = this.user.username;
                 $sessionStorage.loggedInUser = true;
                 $sessionStorage.jwt = result.data.jwt;
 
             })
             .catch(e => {
-
                 $sessionStorage.loggedInUser = false;
                 $sessionStorage.jwt = false;
+                $sessionStorage.username = false;
                 if(e.status === 404) {
                     this.mes = 'Faild to login!';
                     this.mesClass = 'is-danger';

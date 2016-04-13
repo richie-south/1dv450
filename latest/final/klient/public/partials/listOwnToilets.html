@@ -1,0 +1,29 @@
+<section class="hero is-primary">
+  <div class="hero-content">
+    <div class="container">
+      <h1 class="title">
+        All toilets
+      </h1>
+    </div>
+  </div>
+</section>
+<table class="table is-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr data-ng-repeat="t in owntctr.ownList">
+        <td>{{ t.name }} </td>
+        <td>
+            <a data-ng-href='owntoilets/{{t.id}}'>update</a>
+        </td>
+        <td>
+            <a ng-click="owntctr.remove(t.id)" >remove</a>
+        </td>
+    </tr>
+  </tbody>
+</table>

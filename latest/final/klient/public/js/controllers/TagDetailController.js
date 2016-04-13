@@ -4,8 +4,6 @@ angular
   .module('myapp')
   .controller('TagDetailController', TagDetailController);
 
-
-
 function TagDetailController($scope, $routeParams, TagService) {
 
     TagService.getAllToiletsOnTag($routeParams.id)

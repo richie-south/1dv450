@@ -47,6 +47,7 @@ Rails.application.routes.draw do
             resources :toilets, only: [:index]
         end
 
+        get 'creator_by_name' => 'creators#creator_by_name'
     end
   end
 

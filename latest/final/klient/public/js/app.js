@@ -33,6 +33,16 @@ angular
           controller: 'LoginController',
           controllerAs: 'loginctr'
         }).
+        when('/owntoilets/', {
+          templateUrl: '/partials/listOwnToilets.html',
+          controller: 'CrudToiletsController',
+          controllerAs: 'owntctr'
+        }).
+        when('/owntoilets/:id', {
+          templateUrl: '/partials/listOwnToilet.html',
+          controller: 'OwnToiletController',
+          controllerAs: 'ottctr'
+        }).
         otherwise({
           redirectTo: '/'
         });

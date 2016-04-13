@@ -1,0 +1,48 @@
+<section class="hero is-primary">
+  <div class="hero-content">
+    <div class="container">
+      <h1 class="title">
+          One of your toilets
+      </h1>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+    <div class="container">
+
+
+        <div class="myform">
+            <form name="form" class="css-form" novalidate>
+
+
+            <p class="control ">
+                <input class="input" value="{{ottctr.toilet.name}}" type="text" placeholder="name" ng-model="ottctr.toilet.name" name="name"  >
+            </p>
+
+
+            <p class="control ">
+                <input class="input is-primary" value="{{ottctr.toilet.description}}" type="text" placeholder="description"  ng-model="ottctr.toilet.description" name="description">
+            </p>
+            <p class="control ">
+                <input class="input is-primary" value="{{ottctr.toilet.address}}" type="text" placeholder="address"  ng-model="ottctr.toilet.address" name="address">
+            </p>
+
+
+            <div data-ng-repeat="tag in ottctr.toilet.tags">
+                <p class="control">
+                  <input class="input is-primary" value="{{tag}}" type="text" placeholder="name"  ng-model="ottctr.toilet.tag" name="tag$index">
+                </p>
+            </div>
+
+            <p class="control">
+                <button class="button is-success" ng-click="ottctr.save(user)">
+                    submit
+                </button>
+            </p>
+
+            </form>
+        </div>
+
+    </div>
+</section>
