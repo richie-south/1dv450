@@ -27,6 +27,10 @@ class Api::V1::ToiletsController < Api::V1::ApiBaseController
             location.each do |loc|
                 toilet.push(Toilet.find_by_id(location.toilet_id))
             end
+        elsif params[:search]
+          toilet = Toilet.where("name like ? OR description like ?", "%#{params[:search]}%", "%#{params[:search]}%")
+          #render json: {requested_events: @event}, status: :ok
+
         elsif params[:pos].present? # gets all toilets and joins toilet width positions if posible
             toilet = Toilet.all
 

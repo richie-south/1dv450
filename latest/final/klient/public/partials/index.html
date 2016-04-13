@@ -1,3 +1,50 @@
+<section class="hero is-primary">
+  <div class="hero-content">
+    <div class="container">
+      <h1 class="title">
+        search
+      </h1>
+    </div>
+  </div>
+</section>
+
+<div class="notification" data-ng-class="indexc.mesClass">
+    {{ indexc.mes }}
+</div>
+
+<section class="section">
+    <div class="container">
+        <div class="myform">
+            <form name="form" class="css-form" novalidate>
+
+                <p class="control has-addons">
+                  <input type="text" class="form-control" placeholder="search" ng-model="indexc.searchfield">
+                  <button class="button is-info" ng-click="indexc.search(user)">
+                      Search
+                  </button>
+                </p>
+            </form>
+        </div>
+      
+    </div>
+  </section>
 
 
-<h1>HEJ detta är första sidan</h1>
+
+
+<table class="table is-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>More info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr data-ng-repeat="t in indexc.toiletList">
+        <td>{{ t.name }} </td>
+        <td>
+            <a data-ng-href='toilets/{{t.id}}'>More info</a>
+        </td>
+    </tr>
+  </tbody>
+</table>
