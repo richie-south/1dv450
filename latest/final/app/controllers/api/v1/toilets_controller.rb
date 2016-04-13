@@ -81,7 +81,6 @@ class Api::V1::ToiletsController < Api::V1::ApiBaseController
     end
 
 
-
     def create
         toilet = Toilet.new(toilet_params.except(:tags, :positions)) # creates new toilet width all parameters except tags, positions
         toilet.creator_id = current_user.id
@@ -167,8 +166,6 @@ class Api::V1::ToiletsController < Api::V1::ApiBaseController
             render json: { errors: "toilet not found! " }, status: :not_found
         end
     end
-
-
 
     private
 
