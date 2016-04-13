@@ -32,10 +32,13 @@
             </p>
 
 
-            <div data-ng-repeat="tag in ottctr.toilet.tags">
-                <p class="control">
-                  <input class="input is-primary" value="{{tag}}" type="text" placeholder="name"  ng-model="ottctr.toilet.tag" name="tag$index">
-                </p>
+            <div data-ng-repeat="tag in ottctr.tags">
+                    <p class="control">
+                    <label class="checkbox">
+                      <input type="checkbox" id="tag-{{$index}}" ng-model="tag.val" ng-checked="tag.val">
+                        {{tag.name}}
+                    </label>
+                  </p>
             </div>
 
             <p class="control">

@@ -17,8 +17,6 @@ function newToiletController($scope, $http, $sessionStorage, $route, $routeParam
             console.log(e);
         });
         this.save = function(){
-                console.log(this);
-
             var getTags = (tags) => {
                 return tags.filter(tag => {
                     return tag.hasOwnProperty('val') && tag.val === true;

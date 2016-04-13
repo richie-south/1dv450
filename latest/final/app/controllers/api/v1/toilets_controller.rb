@@ -27,7 +27,7 @@ class Api::V1::ToiletsController < Api::V1::ApiBaseController
             location.each do |loc|
                 toilet.push(Toilet.find_by_id(location.toilet_id))
             end
-        elsif params[:pos] # gets all toilets and joins toilet width positions if posible
+        elsif params[:pos].present? # gets all toilets and joins toilet width positions if posible
             toilet = Toilet.all
 
             toilet = toilet.map { |t|

@@ -6,7 +6,9 @@ angular
     function($routeProvider, $locationProvider) {
       $routeProvider.
         when('/', {
-          templateUrl: '/partials/index.html'
+          templateUrl: '/partials/index.html',
+          controller: 'indexController',
+          controllerAs: 'indexc'
         }).
         when('/toilets', {
           templateUrl: '/partials/toilet-list.html',

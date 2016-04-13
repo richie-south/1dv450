@@ -22,7 +22,7 @@ function CrudToiletsController($scope, $http, CrudToiletService, $sessionStorage
         $route.reload();
         CrudToiletService.remove(id)
             .then(value => {
-                
+
             })
             .catch(e => console.log(e));
 
