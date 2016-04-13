@@ -13,6 +13,12 @@ function TagService($q, $http) {
 
         getAllToiletsOnTag: function(id){
             return $http.get('http://localhost:3000/api/toilets/?appkey=supernyckelen&tag_id='+id);
+        },
+
+        getOnId: function(id){
+            return $http.get('http://localhost:3000/api/tags/'+id+'?appkey=supernyckelen');
         }
+
+
     };
 }

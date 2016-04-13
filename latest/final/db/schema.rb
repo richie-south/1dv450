@@ -43,9 +43,12 @@ ActiveRecord::Schema.define(version: 20160329172600) do
 
   create_table "tags", force: :cascade do |t|
     t.string   "name"
+    t.integer  "creator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "tags", ["creator_id"], name: "index_tags_on_creator_id"
 
   create_table "tags_toilets", id: false, force: :cascade do |t|
     t.integer "toilet_id"

@@ -122,13 +122,8 @@ class Api::V1::ToiletsController < Api::V1::ApiBaseController
 
             # is positions param set
             if toilet_params[:positions].present?
-                toilet.positions = [] # emty positions
                 toilet_params[:positions].each do |pos|
-                    if Position.find_by_address(pos['address']).present? # if position exsists throw error
-                        render json: { errors: "position is used by a nother toilet! " }, status: :conflict
-                    else
-                        Position.create(address: pos['address'], toilet_id: toilet.id) # crates new position
-                    end
+                    Position.create(address: pos['address'], toilet_id: toilet.id) # crates new position
                 end
             end
 

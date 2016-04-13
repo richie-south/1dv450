@@ -8,6 +8,9 @@ class Api::V1::TagsController <  Api::V1::ApiBaseController
         if params[:toilet_id].present?
             to = Toilet.find_by_id(params[:toilet_id])
             tags = to.tags unless to.nil?
+
+        elsif params[:creator_id].present?
+            tags = Tag.select("*").where(creator_id: params[:creator_id])
         else
             tags = Tag.all # gets all tags if no toilet_id is set
         end
@@ -35,6 +38,8 @@ class Api::V1::TagsController <  Api::V1::ApiBaseController
     # creates a tag and chesk if it alrady exists
     def create
         t = Tag.new(tag_params)
+        t.creator_id = current_user.id
+
         if Tag.where(name: t.name).present? # cheks if it exists
             render json: { errors: "tag already exsists" }, status: :conflict
         else

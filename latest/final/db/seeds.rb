@@ -16,8 +16,8 @@ cre3 = Creator.create(:name => "pro", :password => "1234567")
 
 tot1 = Toilet.create(:name => "slotts toan!", :description => "en av alla fina toaletter på slottet", creator_id: cre1.id)
 
-tag1 = Tag.create(name: "slottet")
-tag2 = Tag.create(name: "premium")
+tag1 = Tag.create(name: "slottet", creator_id: cre1.id)
+tag2 = Tag.create(name: "premium", creator_id: cre1.id)
 
 tot1.tags << tag1
 tot1.tags << tag2
@@ -29,17 +29,17 @@ Position.create(address: "Stagneliusgatan 1B, 392 34 Kalmar", toilet_id: tot2.id
 
 
 tot3 = Toilet.create(:name => "kalmar nyckel", :description => "meskalin delen", creator_id: cre1.id)
-tag3 = Tag.create(name: "lukar illa")
-tag4 = Tag.create(name: "media")
+tag3 = Tag.create(name: "lukar illa", creator_id: cre3.id)
+tag4 = Tag.create(name: "media", creator_id: cre3.id)
 tot3.tags << tag3
 tot3.tags << tag4
 Position.create(address: "Gröndalsvägen 19B, 392 36 Kalmar", toilet_id: tot3.id)
 
 
 tot4 = Toilet.create(:name => "kalmar slottshotell", :description => "mycket fin toa!", creator_id: cre1.id)
-tag5 = Tag.create(name: "hotell")
-tot3.tags << tag1
-tot3.tags << tag5
+tag5 = Tag.create(name: "hotell", creator_id: cre3.id)
+tot4.tags << tag1
+tot4.tags << tag5
 Position.create(address: "Slottsvägen 7, 392 33 Kalmar", toilet_id: tot4.id)
 
 

@@ -2,28 +2,28 @@
 
 angular
   .module('myapp')
-  .controller('OwnToiletController', OwnToiletController);
+  .controller('OwnTagController', OwnTagController);
 
-function OwnToiletController($scope, $routeParams, CrudToiletService, ToiletService) {
+function OwnTagController($scope, $routeParams, CrudTagService, TagService) {
 
-    ToiletService.getToilet($routeParams.id)
+    TagService.getOnId($routeParams.id)
         .then(value => {
             console.log(value);
-            this.toilet = value.data;
+            this.tag = value.data;
         });
 
     this.save = function(){
 
         var obj = {
-            toilet:{
-                name: this.toilet.name,
-                description: this.toilet.description,
+            tag:{
+                name: this.tag.name,
+                description: this.tag.description,
                 positions:[
-                    { address: this.toilet.address }
+                    { address: this.tag.address }
                 ]
             }
         };
-        CrudToiletService.update(obj, $routeParams.id)
+        CrudTagService.update(obj, $routeParams.id)
             .then(value => {
                 this.mes = 'Update succsesfull';
                 this.mesClass = 'is-success';

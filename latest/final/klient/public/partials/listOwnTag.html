@@ -1,0 +1,36 @@
+<section class="hero is-primary">
+  <div class="hero-content">
+    <div class="container">
+      <h1 class="title">
+          One of your tags
+      </h1>
+    </div>
+  </div>
+</section>
+
+<div class="notification" data-ng-class="owntag.mesClass">
+    {{ owntag.mes }}
+</div>
+<section class="section">
+    <div class="container">
+
+
+        <div class="myform">
+            <form name="form" class="css-form" novalidate>
+
+
+            <p class="control ">
+                <input class="input" value="{{owntag.tag.name}}" type="text" placeholder="name" ng-model="owntag.tag.name" name="name"  >
+            </p>
+
+            <p class="control">
+                <button class="button is-success" ng-click="owntag.save(tag)">
+                    submit
+                </button>
+            </p>
+
+            </form>
+        </div>
+
+    </div>
+</section>

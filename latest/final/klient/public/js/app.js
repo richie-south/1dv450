@@ -43,6 +43,21 @@ angular
           controller: 'OwnToiletController',
           controllerAs: 'ottctr'
         }).
+        when('/owntags/', {
+          templateUrl: '/partials/listOwnTags.html',
+          controller: 'CrudTagsController',
+          controllerAs: 'owntags'
+        }).
+        when('/owntags/:id', {
+          templateUrl: '/partials/listOwnTag.html',
+          controller: 'OwnTagController',
+          controllerAs: 'owntag'
+        }).
+        when('/newTag', {
+          templateUrl: '/partials/newTag.html',
+          controller: 'newTagController',
+          controllerAs: 'newtag'
+        }).
         otherwise({
           redirectTo: '/'
         });
