@@ -1,33 +1,46 @@
-ladda ned reot
+## Stata apiet
 
-kör bundle install
+- ladda ned reot
+- kör 'bundle install'
+- kör 'rake db:migrate'
+- kör 'rake db:seed'
+- kör 'rails s'
 
-kör rake db:migrate
-kör rake db:seed
-kör rails s
+Skapa dev nycklar ligger nu på http://localhost:3000
+Apiet ligger nu på http://localhost:3000/api/
+
+**Testa apiet**
 
 [Postman url](https://www.getpostman.com/collections/eada35f52017f547bc4f)
 
-#login
 
-användarnamn
+### login för dev nycklar delen
 
-'admin'
+användarnamn: 'admin'
 
-lösen
+lösenord: 'password'
 
-'password'
+användarnamn: 'kalle'
 
-
-användarnamn användare
-
-'kalle'
-
-lösen
-
-'1234567'
+lösen: '1234567'
 
 Mera info finns i seed.rb filen
+
+
+## Angular klienten
+
+- ladda ned repot
+- gå in 'klient' mappen
+- kör 'npm install'
+- kör 'node app'
+
+angular sidan ligger nu på: http://localhost:3334
+
+Login på angular sidan
+
+användarnamn: rick
+
+lösenord: 1234567
 
 
 ## ädrat i api under angular
