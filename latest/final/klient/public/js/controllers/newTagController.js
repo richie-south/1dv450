@@ -12,6 +12,7 @@ function newTagController($scope, $http, $sessionStorage, $route, $routeParams, 
                 name: this.tag.name
             }
         };
+
         CrudTagService.newTag(obj)
             .then(value => {
                 this.mes = 'Create succsesfull';

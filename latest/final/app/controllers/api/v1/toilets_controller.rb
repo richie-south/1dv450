@@ -1,5 +1,6 @@
 class Api::V1::ToiletsController < Api::V1::ApiBaseController
     skip_before_action :authenticate, only: [:index, :show]
+    before_action :authenticate, only: [:create, :destroy, :update]
     before_action :offset_params, only: [:index]
     respond_to :json
 

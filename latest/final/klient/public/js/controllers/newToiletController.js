@@ -44,6 +44,17 @@ function newToiletController($scope, $http, $sessionStorage, $route, $routeParam
                     this.mesClass = 'is-success';
                 })
                 .catch(e => {
+                    console.log('feeeeel, ', e.status);
+                    if(e.status === 500) {
+                        this.mes = 'Faild to create toilet!';
+                        this.mesClass = 'is-danger';
+                    }
+
+                    if(e.status === 409) {
+                        this.mes = 'konflikt ';
+                        this.mesClass = 'is-danger';
+                    }
+
                     if(e.status === 404) {
                         this.mes = 'Faild to create toilet!';
                         this.mesClass = 'is-danger';
@@ -51,6 +62,8 @@ function newToiletController($scope, $http, $sessionStorage, $route, $routeParam
                         this.mes = 'unknown error';
                         this.mesClass = 'is-warning';
                     }
+
+
                 });
         };
 

@@ -1,6 +1,8 @@
 class Api::V1::TagsController <  Api::V1::ApiBaseController
     before_action :offset_params, only: [:index]
     before_action :key_access
+
+    
     before_action :authenticate, only: [:create, :destroy, :update]
 
     # gets all tags or gets all tags for specifik toilet

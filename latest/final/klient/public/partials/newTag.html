@@ -27,24 +27,11 @@
             <form name="form" class="css-form" novalidate>
 
             <p class="control ">
-                <input class="input" type="text" placeholder="name" ng-model="newtoilet.toilet.name" name="name"  >
+                <input class="input" type="text" placeholder="name" ng-model="newtag.tag.name" name="name"  >
             </p>
-
-            <p class="control ">
-                <input class="input is-primary" type="text" placeholder="description"  ng-model="newtoilet.toilet.description" name="description">
-            </p>
-            <p class="control ">
-                <input class="input is-primary" type="text" placeholder="address"  ng-model="newtoilet.toilet.address" name="address">
-            </p>
-
-            <!--<div data-ng-repeat="tag in newtoilet.toilet.tags">
-                <p class="control">
-                  <input class="input is-primary" value="{{tag}}" type="text" placeholder="name"  ng-model="newtoilet.toilet.tag" name="tag$index">
-                </p>
-            </div>-->
 
             <p class="control">
-                <button class="button is-success" ng-click="newtoilet.save(user)">
+                <button class="button is-success" ng-click="newtag.save(tag)">
                     submit
                 </button>
             </p>
